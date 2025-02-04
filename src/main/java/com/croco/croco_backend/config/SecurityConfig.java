@@ -2,6 +2,7 @@ package com.croco.croco_backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -14,14 +15,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/products/**").authenticated()
+                        .anyRequest().permitAll()
                 )
-                .oauth2Login(withDefaults())
-                .formLogin(withDefaults())
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"))
-                .build();
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults());
+
+        return null;
     }
 }
