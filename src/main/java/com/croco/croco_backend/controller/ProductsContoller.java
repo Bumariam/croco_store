@@ -28,6 +28,12 @@ public class ProductsContoller {
     @Autowired
     private ProductRepository repo;
 
+    @GetMapping("/secured")
+    public String secured(){
+        return "secured";
+    }
+
+
     @GetMapping({"", "/"})
     public String showProductList(Model model) {
         List<Product> products = repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
@@ -132,4 +138,7 @@ public class ProductsContoller {
         }
         return "redirect:/products";
     }
+
+
 }
+
