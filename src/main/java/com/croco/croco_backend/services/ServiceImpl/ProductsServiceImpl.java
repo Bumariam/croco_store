@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductsServiceImpl implements ProductsService {
@@ -27,4 +29,16 @@ public class ProductsServiceImpl implements ProductsService {
                 .message("Product created")
                 .build();
     }
+
+    @Override
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product getById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    }
+
 }
