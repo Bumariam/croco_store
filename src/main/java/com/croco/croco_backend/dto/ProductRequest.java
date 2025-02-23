@@ -16,15 +16,8 @@ public class ProductRequest {
     @NotEmpty(message = "The brand is requaired")
     private String brand;
 
-    @NotEmpty(message = "The name is category")
-    private String category;
-
     @Min(0)
-    private double price;
-
     @Size(min = 10, message = "The description should be at least 10 characters")
     @Size(max = 200, message = "The description cannot exceed 10 characters")
-    private String description;
-
-    private MultipartFile imageFile;
+    private double price;
     }
